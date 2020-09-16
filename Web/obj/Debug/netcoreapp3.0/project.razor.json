@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Git\\Allfiles\\Labs\\01\\Starter\\Web\\Web.csproj",
+  "FilePath": "c:\\Git\\DotNetCoreMeetup\\ManagedPlatform\\Web\\Web.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -16,7 +16,7 @@
   "RootNamespace": "Web",
   "Documents": [
     {
-      "FilePath": "c:\\Git\\Allfiles\\Labs\\01\\Starter\\Web\\Pages\\Index.cshtml",
+      "FilePath": "c:\\Git\\DotNetCoreMeetup\\ManagedPlatform\\Web\\Pages\\Index.cshtml",
       "TargetPath": "Pages\\Index.cshtml",
       "FileKind": "mvc"
     }
