@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore API/Api.csproj
+      run: dotnet restore API/Service/Api.csproj
     - name: Build
-      run: dotnet build API/Api.csproj --configuration Release --no-restore
+      run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
