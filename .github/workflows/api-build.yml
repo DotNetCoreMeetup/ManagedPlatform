@@ -25,7 +25,7 @@ jobs:
       if: always()
       env:
          status: ${{job.status}}
-         desc: On always
+         desc: 'On always'
       run: echo ${{desc}} ${{status}}
     - name: The job has failed
       if: failure()
