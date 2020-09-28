@@ -23,6 +23,12 @@ jobs:
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
     - name: Show job status
       if: always()
+      run: echo ${{"On always" + job.status}}
+    - name: The job has failed
+      if: failure()
+      run: echo ${{job.status}}
+    - name: The job has succeeded
+      if: success()
       run: echo ${{job.status}}
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
