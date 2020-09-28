@@ -5,12 +5,12 @@ on:
     branches:
       - master
     paths:
-      - 'API/**'
+      - 'APII/**'
   pull_request:
     branches:
       - master
     paths:
-      - 'API/**'
+      - 'APII/**'
 
 jobs:
   build:
