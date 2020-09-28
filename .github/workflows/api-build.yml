@@ -25,4 +25,11 @@ jobs:
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     - name: The job has failed
       if: failure()
-      run: echo ${{job.status}}
+      uses: bryannice/gitactions-git-issue-creation@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_SHA: ${{ github.sha }}
+        GITHUB_OWNER: 'Owner'
+        GITHUB_REPOSITORY: 'ManagedPlatform'
+        GITHUB_ISSUE_TITLE: ${{job.status}}
+        GITHUB_ISSUE_BODY: 'Issue body'
