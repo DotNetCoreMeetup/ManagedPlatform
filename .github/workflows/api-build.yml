@@ -25,4 +25,6 @@ jobs:
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     - name: The job has failed
       if: failure()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: gh issue create --title "I found a bug" --body "Nothing works"
