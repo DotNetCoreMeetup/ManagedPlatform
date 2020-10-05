@@ -23,9 +23,11 @@ jobs:
       run: dotnet restore API/Service/Api.csproj
     - name: Build
       id: build
-      run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
       env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: |
+          dotnet build API/Service/Api.csproj --configuration Release --no-restore
+          echo "$STEPS_CONTEXT"
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     - name: The job has failed
@@ -33,5 +35,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-           echo ${steps.build.outputs.status}
+           echo "$STEPS_CONTEXT"
            gh issue create --title "I found a bug" --body "Nothing works"
