@@ -33,5 +33,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-           echo "${{ steps.build.outputs.status }}"
+           echo ${steps.build.outputs.status}
            gh issue create --title "I found a bug" --body "Nothing works"
