@@ -10,6 +10,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
 
     steps:
     - uses: actions/checkout@v2
@@ -20,11 +22,16 @@ jobs:
     - name: Install dependencies
       run: dotnet restore API/Service/Api.csproj
     - name: Build
+      id: build
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
+      env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     - name: The job has failed
       if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: gh issue create --title "I found a bug" --body "Nothing works"
+      run: |
+           echo "steps.build.outputs.status"
+           gh issue create --title "I found a bug" --body "Nothing works"
