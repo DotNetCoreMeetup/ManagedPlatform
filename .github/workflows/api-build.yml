@@ -25,11 +25,4 @@ jobs:
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     - name: The job has failed
       if: failure()
-      uses: bryannice/gitactions-git-issue-creation@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_SHA: ${{ github.sha }}
-        GITHUB_OWNER: 'KirillLarionov'
-        GITHUB_REPOSITORY: 'ManagedPlatform'
-        GITHUB_ISSUE_TITLE: ${{job.status}}
-        GITHUB_ISSUE_BODY: 'Issue body'
+      run: gh issue create --title "I found a bug" --body "Nothing works"
