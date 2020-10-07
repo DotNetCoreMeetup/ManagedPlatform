@@ -1,4 +1,4 @@
-name: API build and deploy
+name: Build and deploy API master
 
 on:
   push:
