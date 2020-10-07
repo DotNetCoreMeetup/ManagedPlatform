@@ -27,7 +27,7 @@ jobs:
         dotnet-version: 3.1.301
     
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore API/Service/Api.csproj
     
     - name: Build
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
