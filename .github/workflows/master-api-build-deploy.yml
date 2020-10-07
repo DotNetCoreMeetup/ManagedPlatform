@@ -5,12 +5,12 @@ on:
     branches:
       - master
     paths:
-      - 'APII/**'
+      - 'API/**'
   pull_request:
     branches:
       - master
     paths:
-      - 'APII/**'
+      - 'API/**'
 
 jobs:
   build:
@@ -29,3 +29,8 @@ jobs:
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
+    - name: The job has failed
+      if: failure()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh issue create --title "The job has failed" --body "Build/deployment issue"
