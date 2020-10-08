@@ -46,8 +46,8 @@ namespace Api.Controllers
                     )
                 );
             }
-            Console.Out.WriteLine("Got Images")
-            return Ok(results)
+            Console.Out.WriteLine("Got Images");
+            return Ok(results);
         }
     }
 }
