@@ -35,6 +35,9 @@ jobs:
     - name: Tests
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     
+    - name: Publish
+      run: dotnet publish API/Tests/Tests.csproj
+    
     - name: The job has failed
       if: failure()
       env:
