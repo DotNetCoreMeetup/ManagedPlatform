@@ -29,3 +29,8 @@ jobs:
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
+    - name: The job has failed
+      if: failure()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh issue create --title "BUILD FAILURE for commit ${{ github.sha }}" --body "This issue was automagically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit sha  was _${{ github.sha }}"
