@@ -31,12 +31,12 @@ jobs:
     
     - name: Build
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
-    
+          
     - name: Tests
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     
     - name: Publish
-      run: dotnet publish API/Tests/Tests.csproj
+      run: dotnet publish API/Tests/Tests.csproj --configuration Release --output API/Deployment -p:PublishSingleFile=true --no-restore
     
     - name: The job has failed
       if: failure()
