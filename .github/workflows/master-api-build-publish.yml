@@ -1,4 +1,4 @@
-name: Build and deploy API master
+name: Build and publish API master
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     
     - name: Publish
-      run: dotnet publish API/Service/Api.csproj --configuration Release --output API/Deployment -p:PublishSingleFile=true --runtime win-x64 --no-restore
+      run: dotnet publish API/Service/Api.csproj --configuration Release --output API/Service/Publish -p:PublishSingleFile=true --runtime win-x64 --no-restore
     
     - name: The job has failed
       if: failure()
