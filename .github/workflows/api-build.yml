@@ -1,0 +1,39 @@
+name: .NET Core
+
+on:
+  push:
+    branches-ignore : [ master ]
+  pull_request:
+    branches-ignore: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore API/Service/Api.csproj
+    - name: Build
+      id: build
+      env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: |
+          dotnet build API/Service/Api.csproj --configuration Release --no-restore
+          echo "$STEPS_CONTEXT"
+    - name: Test
+      run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
+    - name: The job has failed
+      if: failure()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+           echo "$STEPS_CONTEXT"
+           gh issue create --title "I found a bug" --body "Nothing works"
