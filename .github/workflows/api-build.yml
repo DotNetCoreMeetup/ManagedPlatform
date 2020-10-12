@@ -34,11 +34,4 @@ jobs:
       if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-           gh issue create --title "The action ${{ github.action }} failed" --body " |
-             workflow: ${{ github.workflow }} |
-             base_ref: ${{ github.base_ref }} |
-             event: ${{ github.event }} |
-             event_name: ${{ github.event_name }} |
-             job: ${{ github.job }} |
-             ref: ${{ github.ref }}"
+      run: gh issue create --title "The workflow ${{ github.workflow }} failed" --body "Job ${{ github.job }} failed on ${{ github.event_name }} to ${{ github.ref }}"
