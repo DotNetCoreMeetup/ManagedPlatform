@@ -30,10 +30,10 @@ jobs:
           echo "$STEPS_CONTEXT"
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
-    - name: The job has failed
+    - name: If job has failed
       if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-           echo "$STEPS_CONTEXT"
+           echo ${{ github.workflow }} ${{ github.base_ref }} ${{ github.event }} ${{ github.event_name }} ${{ github.job }} ${{ github.ref }}
            gh issue create --title "The action ${{ github.action }} failed" --body "Nothing works"
