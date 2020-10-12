@@ -1,4 +1,4 @@
-name: Build API
+name: Build and publish API
 
 on:
   push:
@@ -29,6 +29,8 @@ jobs:
       run: dotnet build API/Service/Api.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish API/Service/Api.csproj --configuration Release -p:PublishSingleFile=true --runtime win-x64 --no-restore
     - name: When job has failed
       if: failure()
       env:
