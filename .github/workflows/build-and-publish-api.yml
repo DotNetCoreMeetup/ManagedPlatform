@@ -1,6 +1,7 @@
 name: Build and publish API
 
 on:
+  workflow_dispatch:  
   push:
     branches:
       - master
