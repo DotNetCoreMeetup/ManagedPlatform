@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build API
 
 on:
   push:
@@ -36,4 +36,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
            echo "$STEPS_CONTEXT"
-           gh issue create --title "I found a bug" --body "Nothing works"
+           gh issue create --title "The action ${{ github.action }} failed" --body "Nothing works"
