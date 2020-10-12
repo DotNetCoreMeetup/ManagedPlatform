@@ -22,16 +22,12 @@ jobs:
     - name: Install dependencies
       run: dotnet restore API/Service/Api.csproj
     - name: Build
-      id: build
-      env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: |
-          dotnet build API/Service/Api.csproj --configuration Release --no-restore
-          echo "$STEPS_CONTEXT"
+      id: build_step
+      run: echo "::set-output name=buildApi::$(dotnet build API/Service/Api.csproj --configuration Release --no-restore)\n"
     - name: Test
       run: dotnet test API/Tests/Tests.csproj --no-restore --verbosity normal
     - name: When job has failed
       if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: gh issue create --title "The workflow ${{ github.workflow }} failed" --body "Job ${{ github.job }} failed on ${{ github.event_name }} to ${{ github.ref }}"
+      run: gh issue create --title "The workflow ${{ github.workflow }} failed" --body "Job ${{ github.job }} failed on ${{ github.event_name }} to ${{ github.ref }}\n Error message ${{steps.build_step.outputs.buildApi}}"
