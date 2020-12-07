@@ -26,6 +26,7 @@ namespace Api.Controllers
         {
             BlobServiceClient serviceClient = new BlobServiceClient(_options.StorageConnectionString);
             BlobContainerClient containerClient = serviceClient.GetBlobContainerClient(containerName);
+            
             await containerClient.CreateIfNotExistsAsync();
             return containerClient;
         }

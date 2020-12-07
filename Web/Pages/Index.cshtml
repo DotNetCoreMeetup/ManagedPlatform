@@ -19,11 +19,11 @@
             <div class="card-header text-dark">
                 Upload a new image
             </div>
-            <div class="card-body">
+            <div class="card-body text-dark">
                 <form method="post" enctype="multipart/form-data">
-                    <div class="custom-file">
+                    <div class="custom-file text-dark">
                         <input type="file" class="custom-file-input" asp-for="Upload">
-                        <label class="custom-file-label" for="FileName">Name</label>
+                        <label class="custom-file-label">Choose image</label>
                     </div>
                     <button type="submit" class="btn btn-secondary">Upload</button>
                 </form>
@@ -34,14 +34,18 @@
         </h1>
         @if (Model.ImageList.Count > 0)
         {
-            <div class="card-columns">
-                @foreach (string imageUrl in Model.ImageList)
-                {
-                    <div class="card">
+            <form method="post" enctype="multipart/form-data">
+                <div class="card-columns">
+                    @foreach (string imageUrl in Model.ImageList)
+                    {
+                    <div class="card custom-control">
                         <img src="@imageUrl" class="img-fluid" />
+                        <input type="hidden" asp-for="Delete" />
+                        <input type="submit" value="Delete" />
                     </div>
-                }
-            </div>
+                    }
+                </div>
+            </form>
         }
         else
         {
